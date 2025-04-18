@@ -1,0 +1,213 @@
+---
+title: "Instruments Used"
+author: "Paul Regier"
+format: 
+  html:
+    toc: true
+    toc-floating:
+      collapsed: false   # expands by default
+      smooth-scroll: true
+---
+
+# Pre-semester Survey
+
+The first three sets of questions involve measuring mindsets. Thus, this survey begins with the prompt:
+
+> Mindset describes how we view ourselves and the world. Below are a series of questions about how you see yourself. There are no right or wrong answers. The best answer is the one that's most true for you right now in your life.
+
+## Growth Mindset Scale (GMS)
+
+The [Growth Mindset Scale (GMS)](https://sparqtools.org/mobility-measure/growth-mindset-scale/) measures how much people believe that they can get smarter if they work at it.
+
+### Items
+
+Read each sentence below and then choose theone response that shows how much you agree with it.
+
+1.  You have a certain amount of intelligence, and you can’t really do much to change it.
+2.  Your intelligence is something about you that you can’t change very much.
+3.  You can learn new things, but you can’t really change your basic intelligence.
+
+
+
+GMS1, GMS2, and GMS3 correspond to questions 1-3 of the GMS. The mean of these three items represents a composite measure of growth mindset.
+
+### Response Format
+
+> Note: all three GMS items are negatively worded.
+
+1 = strongly agree;\
+2 = agree;\
+3 = mostly agree;\
+4 = mostly disagree;\
+5 = disagree;\
+6 = strongly disagree.
+
+### Source
+
+Dweck, C. S. (1999). Self-theories: Their role in motivation, personality, and development. Philadelphia: Psychology Press.
+
+Dweck, C. S., Chiu, C. Y., & Hong, Y. Y. (1995). Implicit theories and their role in judgments and reactions: A world from two perspectives. Psychological Inquiry, 6(4), 267-285.
+
+## Stress Mindset Measure (SMM)
+
+The [Stress Mindset Measure (SMMS)](https://usao0-my.sharepoint.com/:w:/g/personal/pregier_usao_edu/Eea14xz-uRxMgnswpHNr8CoBku5Vyp0hKmWdOPrPy0h9Rw?e=Cwg3yq) measures "the extent to which an individual adopts a mindset that the effects of stress are enhancing or debilitating."
+
+Note a hight SMM score indicates believe that stress is enhancing to performance, verses a low SMM indicates a score that stress is debilitating.
+
+### Items
+
+Rate the extent to which you agree or disagree with the following questions:
+
+1.  The effects of stress are negative and should be avoided.\*
+2.  Experiencing stress facilitates my learning and growth.
+3.  Experiencing stress depletes my health and vitality.\*
+4.  Experiencing stress enhances my performance and productivity.
+5.  Experiencing stress inhibits my learning and growth.\*
+6.  Experiencing stress improves my health and vitality.
+7.  Experiencing stress debilitates my performance and productivity.\*
+8.  The effects of stress are positive and should be utilized.
+
+> \* = Reverse coded
+
+Note: In 2023 data, questions 7-8 were mistakenly omitted from the 2023 data.
+
+### Response Format
+
+1 = strongly agree;\
+2 = agree;\
+3 = mostly agree;\
+4 = mostly disagree;\
+5 = disagree;\
+6 = strongly disagree.
+
+### Source
+
+Dweck, C. S. (1999). Self-theories: Their role in motivation, personality, and development. Philadelphia: Psychology Press.
+
+Dweck, C. S., Chiu, C. Y., & Hong, Y. Y. (1995). Implicit theories and their role in judgments and reactions: A world from two perspectives. Psychological Inquiry, 6(4), 267-285.
+
+Please note that reverse scoring of the negatively worded items (1,3,5) has **already been applied** to the results provided. Thus, a mean of these 6 items, as provided, represents a composite measure of stress mindset.
+
+## Compassion Mindset Scale (CMS)
+
+Compassion is the practice of demonstrating that people are valuable, capable, and responsible in every interaction (Next Element, 2023). Compassion mindset is the extent to which an individual chooses to view themselves and others as valuable, capable, and responsible in every interaction (Regier, 2023)
+
+We anticipate compassion mindset will enhance how a learner engages in the learning process. Next Element has anecdotal evidence that a compassion mindset enhances learning outcomes.
+
+### Items
+
+Rate the extent to which you agree or disagree with the following questions:
+
+1.  I am unconditionally valuable and deserve to be respected.
+2.  Even if I make a mistake or fail to perform, I am still worthwhile as a person.
+3.  I am capable of positive change and contribution.
+4.  Under the right conditions, anyone can learn and grow.
+5.  Pointing fingers gets me further away from a solution.
+6.  No matter what happened before, I am responsible for I do next.
+
+### Response Scale
+
+0 = Strongly Disagree  
+1 = Disagree   
+2 = Neither Agree nor Disagree  
+3 = Agree  
+4 = Strongly Agree
+
+## Compassion Mindset Assessment (CMA)
+
+Same theoretical basis as CMS, but measuring extent to
+
+### Items
+
+How consistently do you currently apply these principles to in your life?
+
+1.  I am unconditionally valuable and deserve to be respected.
+2.  Even if I make a mistake or fail to perform, I am still worthwhile as a person.
+3.  I am capable of positive change and contribution.
+4.  Under the right conditions, anyone can learn and grow.
+5.  Pointing fingers gets me further away from a solution.
+6.  No matter what happened before, I am responsible for I do next.
+
+### Response Scale
+
+1-Never\
+2\
+3\
+4\
+5-All the time
+
+## NEOS Scale
+
+The Next Element Outcomes Scale (NEOS) measures one's self-efficacy for effective functioning across three dimensions: maintaining open (emotions), resourceful (thinking), and persistent (action).
+
+### Items
+
+1.  Stay motivated when things seem impossible.
+2.  Trust in the goodness of others.
+3.  Bounce back quickly when I am stressed out.
+4.  Accept my failures as a necessary part of problem-solving.
+5.  Stay focused on my goals when things keep getting in my way.
+6.  Ask others for help when I need it.
+7.  Find more than one way to solve a problem.
+8.  Understand both my strengths and weaknesses.
+9.  Finish what I start even if I don’t want to.
+
+A mean of these nine items (as the data is provided) represents a composite measure of effective functioning across these three dimensions.
+
+### Response Scale
+
+Questions are rated from 0 (No way I can) to 10 (Definitely sure I can).
+
+### Source
+
+Next Element, Inc.
+
+## Remaining Pre-semester Questions
+
+Four additional questions were also asked using the response scale below:
+
+-   1 - Strongly Disagree\
+-   2 - Disagree\
+-   3 - Neither agree nor disagree\
+-   4 - Agree\
+-   5 - Strongly Agree
+
+`Schedule`: I have made my schedule for the Spring semester with the intent to be a student at USAO next semester.\
+`Grad_4yrs`: I intend to graduate from USAO in the next four years.\
+`Gender`: Women, Man, Transgender, Non-binary (Note, in the pre-semester survey, the options for this were inaccurately provided as Male, Female, Transgender.)\
+`FYS_Section`: One of 16 sections of FYS taught in Fall 2024. Of those, 8 sections were taught by faculty, 3 by adjunct, and 5 by staff. Three sections were online, as listed below.
+
+-   Sections taught by Faculty
+    -   Section 1 - Instructor F1
+    -   Section 5 - Instructor F2\
+    -   Section 7 - Instructor F1
+    -   Section 8 - Instructor F1
+    -   Section 9 - Instructor F3
+    -   Section 10 - Instructor F4
+    -   Section 11 - Instructor F2
+    -   Section 12 - Instructor F5
+-   Sections taught by Adjunct
+    -   Section 2 - Instructor A1
+    -   Section 4 - Instructor A2
+    -   Section 6 - Instructor A1
+-   Sections taught by Staff
+    -   Section 3 - Instructor S1
+    -   Section 13 - Instructor S2 (Online)
+    -   Section 14 - Instructor F3 (Online)
+    -   Section 15 - Instructor F3 (Staff)
+    -   Section 17 - Instructor F3 (Online)
+
+# Post-Semester Survey
+
+In addition to all the above questions, the following questions were provided on the pre-semester survey, using the response scale below:
+
+-   1 - Strongly Disagree\
+-   2 - Disagree\
+-   3 - Neither agree nor disagree\
+-   4 - Agree\
+-   5 - Strongly Agree
+
+`Value1` - The in-class sessions were a valuable use of my time. (If you are enrolled in an online session, choose NA)\
+`Value2` - The online asynchronous activities were a valuable use of my time.\
+`Value3` - I would prefer if this course involved more in-person sessions.\
+`Value4` - I would prefer if this course involved more online activities.

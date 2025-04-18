@@ -1,0 +1,363 @@
+---
+title: "IDS 2883 - First-Year Seminar - Student Survey Analysis"
+author: "Fall 2023"
+output:
+  html_document:
+    number_sections: yes
+    theme: spacelab
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    number_sections: yes
+    toc: no
+  word_document:
+    toc: no
+urlcolor: blue
+---
+
+```{r setup3, include=F, echo=F}
+knitr::opts_chunk$set(echo = TRUE)
+options(kableExtra.auto_format = FALSE)
+require('knitr')
+require('dplyr')
+require('readxl') 
+require('kableExtra')
+
+options(knitr.kable.NA = '')
+#setwd("~/Dropbox/USAO/~IDS 1223/Syllabus")
+```
+
+\vspace{-20pt}
+
+
+# Pre-semester Survey
+
+
+Pre-semester Survey:  n = 179 responses, 161 (90%) agreed to participate
+
+```{r include=FALSE}
+pre = read.csv("pre_semester_F2023.csv")
+```
+
+```{r include=FALSE}
+table(pre$Participate)
+```
+
+```{r include=FALSE}
+161/179
+```
+
+```{r include=FALSE}
+pre = read.csv("pre_semester_F2023 UIC Check.csv")
+```
+
+
+
+
+# Post-semester Survey
+
+Post-semester Survey: n = 216 responses, 206 (95%) agreed to participate
+```{r include=FALSE}
+post = read.csv("post_semester_F2023.csv")
+```
+
+
+```{r include=FALSE}
+table(post$Participate)
+```
+
+```{r include=FALSE}
+206/216
+```
+
+
+
+```{r include=FALSE}
+post = read.csv("post_semester_F2023 UIC Check.csv")
+```
+
+
+
+
+
+# GMS
+
+
+```{r include=FALSE}
+require(dplyr)
+
+example = pre$GMS1
+likert2int = function( example ) {
+  data = revalue(example, 
+          c( "Strongly Agree" = 1,
+             "Agree" =  1,
+             "Mostly Agree" = 3,
+             "Mostly Disagree" = 4,
+             "Disagree" = 5,
+             "Strongly Disagree" = 6)
+          )
+  as.integer(data)
+}
+data = post
+GMScomp = function( data ) {
+  cbind( likert2int( data$GMS1 ),
+         likert2int( data$GMS2 ),
+         likert2int( data$GMS3 )
+  )
+}
+
+GMSpre  = GMScomp( pre )
+GMS = apply(GMSpre, 1, mean)
+pre = cbind(pre,GMS)
+GMSpost = GMScomp( post )
+GMS = apply(GMSpost, 1, mean)
+post = cbind(post,GMS)
+```
+
+
+
+
+
+## Reliability (Cronbach's Alpha)
+
+
+```{r}
+require(ltm)
+a1 = cronbach.alpha( na.omit( GMSpre ) )
+a2 = cronbach.alpha( na.omit( GMSpost ) )
+a3 = cronbach.alpha( rbind( na.omit( GMSpre ), na.omit( GMSpost ) ))
+a = c(a1$alpha,a2$alpha,a3$alpha)
+names(a) = c("Pre-semester","Post-semester", "Aggregate")
+a
+```
+
+## Pre vs Post
+
+Unpaired 
+
+```{r}
+par(mfrow = c(1, 2))
+hist(pre$GMS, breaks = 5)
+hist(post$GMS, breaks = 5)
+```
+
+```{r}
+t.test(pre$GMS, post$GMS)
+```
+
+
+
+# SMM
+
+
+```{r include=FALSE}
+require(dplyr)
+
+likert2int = function( example ) {
+  data = revalue(example, 
+          c("Strongly Disagree"= 0,
+            "Disagree" = 1,
+            "Neither Agree nor Disagree" = 2,
+            "Agree" = 3,
+            "Strongly Agree" = 4) )
+  as.integer(data)
+}
+likert2int_rev = function( example ) {
+  data = revalue(example, 
+          c("Strongly Disagree"= 4,
+            "Disagree" = 3,
+            "Neither Agree nor Disagree" = 2,
+            "Agree" = 1,
+            "Strongly Agree" = 0) )
+  as.integer(data)
+}
+data = post
+SMMcomp = function( data ) {
+  cbind( likert2int_rev( data$SMM1 ),
+         likert2int(     data$SMM2 ),
+         likert2int_rev( data$SMM3 ), 
+         likert2int(     data$SMM4 ),
+         likert2int_rev( data$SMM5 ),
+         likert2int(     data$SMM6 ))
+#         likert2int_rev( data$SMM7 ),
+#         likert2int(     data$SMM8  ) )
+}
+
+
+SMMpre  = SMMcomp( pre )
+SMM = apply(SMMpre, 1, mean)
+pre = cbind(pre, SMM = SMM)
+
+SMMpost = SMMcomp( post )
+SMM = apply(SMMpost, 1, mean)
+post = cbind(post,SMM = SMM)
+```
+
+
+
+## Reliability (Cronbach's Alpha)
+
+
+```{r}
+require(ltm)
+a1 = cronbach.alpha( na.omit( SMMcomp( pre )) )
+a2 = cronbach.alpha( na.omit( SMMcomp( post )) )
+a3 = cronbach.alpha( rbind( na.omit( SMMcomp( pre )), na.omit( SMMcomp( post )) ))
+a = c(a1$alpha,a2$alpha,a3$alpha)
+names(a) = c("Pre-semester","Post-semester", "Aggregate")
+a
+```
+
+
+## Pre vs. Post
+
+Unpaired
+
+```{r}
+t.test(pre$SMM, post$SMM)
+```
+
+
+```{r}
+pre = cbind(pre, SMMpre, GMSpre)
+post = cbind(post, SMMpost, GMSpost)
+```
+
+
+
+# BOTH
+
+
+
+```{r}
+BOTH = intersect(pre$UIC,post$UIC)
+
+BothPre = c()
+for ( i in 1:99) {
+  BothPre = c(BothPre, which( pre$UIC==BOTH[i]))
+}
+BothPost = c()
+for ( i in 1:99) {
+  BothPost = c(BothPost, which( post$UIC==BOTH[i]))
+}
+
+```
+
+```{r}
+both = merge(pre, post, by.x="UIC", by.y="UIC")
+
+both = cbind( both, SMMdif = both$SMM.y-both$SMM.x,
+                    GMSdif = both$GMS.y-both$GMS.x)
+```
+```{r}
+both$Section.x == both$Section.y
+```
+
+```{r}
+d99 = with( both, data.frame(
+        UIC = UIC,
+        Gender = Gender3,
+        SectionNum = Section2.x,
+        SectionName = Section.x,
+        GMS.x = GMS.x,
+        GMS.y = GMS.y,
+        GMS.dif = GMSdif,
+        SMM.x = SMM.x,
+        SMM.y = SMM.y,
+        SMM.dif = SMMdif
+  )
+)
+d99
+```
+```{r}
+both$GMS.x
+```
+
+
+```{r}
+write.csv(d99, "d99.csv", row.names=TRUE)
+```
+
+
+```{r}
+barplot( table(d99$SectionNum))
+```
+
+```{r}
+boxplot( GMS.dif ~ as.factor(SectionNum), data = d99,
+         main = "Change of students Growth Mindset - Fall 2023",
+         xlab = "Section Number",
+         ylab = "Change",
+         col = c( rep("red",3),
+                  "orange","red",
+                  rep("blue",5),
+                  rep("grey",1),
+                  rep("blue",1)))
+legend("topleft", c("Ajunct", "Overload", "Full-Time", "Online"),
+       box.lwd = 0, fill = c("red", "orange","blue", "grey"))
+abline(h=0)
+```
+
+```{r}
+boxplot( SMM.dif ~ as.factor(SectionNum), data = d99,
+         main = "Change of students views that stress is enhancing - Fall 2023",
+         xlab = "Section Number",
+         ylab = "Change",
+         col = c( rep("red",3),
+                  "orange","red",
+                  rep("blue",5),
+                  rep("grey",1),
+                  rep("blue",1)))
+legend("topleft", c("Ajunct", "Overload", "Full-Time", "Online"),
+       box.lwd = 0, fill = c("red", "orange","blue", "grey"))
+abline(h=0)
+```
+
+```{r}
+table(d99$SectionNum)
+```
+
+```{r}
+hist( both$SMM.y - both$SMM.x)
+```
+
+
+```{r}
+t.test( both$SMM.y - both$SMM.x, alternative = "greater")
+wilcox.test( both$SMM.y - both$SMM.x, alternative = "greater")
+```
+
+
+```{r}
+hist( both$GMS.y - both$GMS.x)
+```
+
+```{r}
+t.test( both$GMS.y - both$GMS.x, alternative = "greater")
+wilcox.test( both$GMS.y - both$GMS.x, alternative = "greater")
+```
+
+
+```{r}
+names(both)
+```
+
+```{r}
+both$Grad_4yrs.x
+```
+
+```{r}
+with(both, t.test( GMS.x, GMS.y, paired = T ))
+```
+```{r}
+with(both, t.test( SMM.x, SMM.y, paired = T ))
+```
+
+
+
+```{r}
+lm1 = lm( Grad_4yrs.y ~ GMSdif + SMMdif + Gender.x, data = both)
+
+summary(lm1)
+```
+

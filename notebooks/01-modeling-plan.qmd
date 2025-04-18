@@ -1,0 +1,10 @@
+---
+title: "Modeling Plan"
+author: "Paul Regier"
+format: html
+editor: visual
+---
+
+## Variable Defintions
+
+01-modeling-play.qm

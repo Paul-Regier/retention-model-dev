@@ -1,0 +1,257 @@
+---
+title: "IDS 2883 - First-Year Seminar - Student Survey Analysis"
+author: "Fall 2023"
+output:
+  html_document:
+    number_sections: yes
+    theme: spacelab
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    number_sections: yes
+    toc: no
+  word_document:
+    toc: no
+urlcolor: blue
+---
+
+```{r setup3, include=F, echo=F}
+knitr::opts_chunk$set(echo = FALSE)
+options(kableExtra.auto_format = FALSE)
+require('knitr')
+require('dplyr')
+require('readxl') 
+require('kableExtra')
+
+options(knitr.kable.NA = '')
+#setwd("~/Dropbox/USAO/~IDS 1223/Syllabus")
+```
+
+\vspace{-20pt}
+
+```{r include=FALSE}
+require(dplyr)
+
+likert2int5 = function( example ) {
+  data = revalue(example, 
+          c("Strongly Disagree"= 0,
+            "Disagree" = 1,
+            "Neither Agree nor Disagree" = 2,
+            "Agree" = 3,
+            "Strongly Agree" = 4) )
+  as.integer( data)
+}
+
+
+likert2intTime = function( example ) {
+  data = revalue(example, 
+          c("1-Never"= 1,
+            "5-All the time" = 5) )
+  as.integer(data)
+}
+
+```
+
+# Pre-semester Survey
+
+
+
+```{r include=FALSE}
+pre = read.csv("pre_semester_F2023 UIC Check.csv")
+post = read.csv("post_semester_F2023 UIC Check.csv")
+```
+
+
+```{r}
+both = merge(pre, post, by.x="UIC", by.y="UIC")
+
+both = cbind( both, SMMdif = both$SMM.y-both$SMM.x,
+                    GMSdif = both$GMS.y-both$GMS.x)
+```
+
+
+```{r}
+CMS = paste("CMS", 1:6,".x", sep="")
+CAS = paste("CAS", 1:6,".x", sep="")
+NEOS = paste("NEOS",1:9,".x",sep="")
+
+CMSy = paste("CMS", 1:6,".y", sep="")
+CASy = paste("CAS", 1:6,".y", sep="")
+NEOSy = paste("NEOS",1:9,".y",sep="")
+
+
+CMScompx = apply( both[,CMS], 2, likert2int5)
+CMScompy = apply( both[,CMSy], 2, likert2int5)
+```
+
+```{r}
+myfactor = function(x) factor(x,levels = 0:4)
+myfactorTable = function(x) {
+  table( myfactor( CMScompx[,4] ) )
+}
+
+myfactorTable( CMScompx[,4] )
+```
+
+```{r}
+Xt = apply( CMScompx, 2, myfactorTable)
+lapply(Xt, barplot, las = 2)
+```
+
+
+
+```{r}
+X = apply( CMScompy, 2, table)
+lapply(X, barplot, las = 2)
+```
+
+
+
+
+
+
+## Reliability (Cronbach's Alpha)
+
+
+```{r}
+require(ltm)
+a1 = cronbach.alpha( na.omit( GMSpre ) )
+a2 = cronbach.alpha( na.omit( GMSpost ) )
+a3 = cronbach.alpha( rbind( na.omit( GMSpre ), na.omit( GMSpost ) ))
+a = c(a1$alpha,a2$alpha,a3$alpha)
+names(a) = c("Pre-semester","Post-semester", "Aggregate")
+a
+```
+
+## Pre vs Post
+
+Unpaired 
+
+```{r}
+par(mfrow = c(1, 2))
+hist(pre$GMS, breaks = 5)
+hist(post$GMS, breaks = 5)
+```
+
+```{r}
+t.test(pre$GMS, post$GMS)
+```
+
+
+
+# SMM
+
+
+
+
+SMMpre  = SMMcomp( pre )
+SMM = apply(SMMpre, 1, mean)
+pre = cbind(pre, SMM = SMM)
+
+SMMpost = SMMcomp( post )
+SMM = apply(SMMpost, 1, mean)
+post = cbind(post,SMM = SMM)
+```
+
+
+
+## Reliability (Cronbach's Alpha)
+
+
+```{r}
+require(ltm)
+a1 = cronbach.alpha( na.omit( SMMcomp( pre )) )
+a2 = cronbach.alpha( na.omit( SMMcomp( post )) )
+a3 = cronbach.alpha( rbind( na.omit( SMMcomp( pre )), na.omit( SMMcomp( post )) ))
+a = c(a1$alpha,a2$alpha,a3$alpha)
+names(a) = c("Pre-semester","Post-semester", "Aggregate")
+a
+```
+
+
+## Pre vs. Post
+
+Unpaired
+
+```{r}
+t.test(pre$SMM, post$SMM)
+```
+
+
+```{r}
+pre = cbind(pre, SMMpre, GMSpre)
+post = cbind(post, SMMpost, GMSpost)
+```
+
+
+
+# BOTH
+
+
+
+```{r}
+BOTH = intersect(pre$UIC,post$UIC)
+
+BothPre = c()
+for ( i in 1:99) {
+  BothPre = c(BothPre, which( pre$UIC==BOTH[i]))
+}
+BothPost = c()
+for ( i in 1:99) {
+  BothPost = c(BothPost, which( post$UIC==BOTH[i]))
+}
+
+```
+
+```{r}
+both = merge(pre, post, by.x="UIC", by.y="UIC")
+
+both = cbind( both, SMMdif = both$SMM.y-both$SMM.x,
+                    GMSdif = both$GMS.y-both$GMS.x)
+```
+
+
+```{r}
+hist( both$SMM.y - both$SMM.x)
+```
+
+
+```{r}
+t.test( both$SMM.y - both$SMM.x, alternative = "greater")
+wilcox.test( both$SMM.y - both$SMM.x, alternative = "greater")
+```
+
+
+```{r}
+hist( both$GMS.y - both$GMS.x)
+```
+
+```{r}
+t.test( both$GMS.y - both$GMS.x, alternative = "greater")
+wilcox.test( both$GMS.y - both$GMS.x, alternative = "greater")
+```
+
+
+```{r}
+names(both)
+```
+
+```{r}
+both$Grad_4yrs.x
+```
+
+```{r}
+with(both, t.test( GMS.x, GMS.y, paired = T ))
+```
+```{r}
+with(both, t.test( SMM.x, SMM.y, paired = T ))
+```
+
+
+
+```{r}
+lm1 = lm( Grad_4yrs.y ~ GMSdif + SMMdif + Gender.x, data = both)
+
+summary(lm1)
+```
+
